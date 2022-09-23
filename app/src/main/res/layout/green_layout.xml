@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+2.	También usar un linearlayout vertical
+para hacer una lista de 5 filas con cinco comidas favoritas
+ con el fondo del layout verde...
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#004400"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:color="#fff">
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:text="Tacos"
+        android:textAlignment="center"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:text="Sandwich"
+        android:textAlignment="center"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/txt3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:text="Pizza"
+        android:textAlignment="center"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/txt4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:text="Lasagña"
+        android:textAlignment="center"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:id="@+id/txt5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="30dp"
+        android:text="Sancocho"
+        android:textAlignment="center"
+        android:textColor="#fff"/>
+
+</LinearLayout>

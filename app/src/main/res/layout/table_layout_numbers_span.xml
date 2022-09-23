@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+2.	También usar un linearlayout vertical
+para hacer una lista de 5 filas con cinco comidas favoritas
+ con el fondo del layout verde...
+-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="*"
+    android:color="#fff">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/one"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="1"/>
+        <TextView
+            android:id="@+id/two"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="2"/>
+        <TextView
+            android:id="@+id/three"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:text="3"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/four"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="4"/>
+        <TextView
+            android:id="@+id/five"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="5"/>
+        <TextView
+            android:id="@+id/six"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="6"/>
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:layout_span="3"
+            android:text="Boton"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/seven"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="7"/>
+        <TextView
+            android:id="@+id/eigth"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="8"/>
+        <TextView
+            android:id="@+id/nine"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="9"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/ten"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="10"/>
+        <TextView
+            android:id="@+id/eleven"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="11"/>
+        <TextView
+            android:id="@+id/twelve"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:text="12"/>
+    </TableRow>
+
+</TableLayout>
