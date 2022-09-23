@@ -3,74 +3,65 @@ package com.example.testmobile.utils;
 import java.math.BigDecimal;
 
 public class Calculator {
+    public static final String EMPTY_STRING = "";
     private BigDecimal first, second;
-    private TextCalculator resultText;
 
-    public Calculator(TextCalculator resultText) {
-        this.resultText = resultText;
+    public Calculator() {
     }
 
-    public boolean evaluate(){
-        if (!isPossible()) {
-            this.resultText.clearResult();
-            return false;
-        }
-
-        if(this.second == null){
-            this.resultText.setText(this.first.toString());
-            return false;
-        }
-
-        return true;
-    }
-
-    public void add(String value) {
-//        Evaluate if the first
-        if (this.first == null || this.first.equals(BigDecimal.ZERO) || this.second != null) {
-            this.first = new BigDecimal(value);
+    public void add(String amount){
+        if(this.first == null){
+            this.first = new BigDecimal(amount);
             return;
         }
-        second = new BigDecimal(value);
+
+        this.second = new BigDecimal(amount);
     }
 
-    public void sum() {
-        if (!evaluate()){
-            return;
+    public String sum() {
+        if (!isPossible()){
+            return EMPTY_STRING;
         }
+
         this.first = first.add(this.second);
         this.clearSecondField();
-        this.resultText.setText(this.first.toString());
+
+        return this.first.toString();
     }
 
-    public void subtract() {
-        if (!evaluate()){
-            return;
+    public String subtract() {
+        if (!isPossible()){
+            return EMPTY_STRING;
         }
         first = first.subtract(second);
         this.clearSecondField();
-        this.resultText.setText(first.toString());
+
+        return this.first.toString();
     }
 
-    public void multiply() {
-        if (!evaluate()){
-            return;
+    public String multiply() {
+        if (!isPossible()){
+            return EMPTY_STRING;
         }
         first = first.multiply(second);
         this.clearSecondField();
-        this.resultText.setText(first.toString());
+
+        return this.first.toString();
     }
 
-    public void divide() {
+    public String divide() {
         try {
-            if (!evaluate()){
-                return;
+            if (!isPossible()){
+                return EMPTY_STRING;
             }
-            first = first.add(second);
+            first = first.divide(second);
             this.clearSecondField();
-            this.resultText.setText(first.toString());
+
+            return this.first.toString();
         } catch (ArithmeticException e) {
-            this.resultText.setText("Syntax Error");
         }
+
+        return EMPTY_STRING;
     }
 
     private boolean isPossible() {

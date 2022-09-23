@@ -20,11 +20,11 @@ public class TextCalculator {
         }
     }
 
-    public void setText(CharSequence nextText) {
+    public void setValue(CharSequence nextText) {
         results.setText(nextText);
     }
 
-    public String getText() {
+    public String getValue() {
         return results.getText().toString();
     }
 
@@ -47,7 +47,7 @@ public class TextCalculator {
     }
 
     private void add(CharSequence nextText) {
-        if (!results.getText().equals(EMPTY_DEFAULT_TEXT) && this.getText().equals(nextText)) {
+        if (!results.getText().equals(EMPTY_DEFAULT_TEXT) && this.getValue().equals(nextText)) {
             return;
         }
 //        Syntax error checker
@@ -60,7 +60,7 @@ public class TextCalculator {
 
 //    Check in case throw a error when the calculator fails.
     public boolean isThrowSyntaxError() {
-        return this.getText().equals(DivisionByZeroException.SYNTAX_ERROR);
+        return this.getValue().equals(DivisionByZeroException.SYNTAX_ERROR);
     }
 
     private boolean isSpecialCharacterAlreadyExists(CharSequence nextText) {

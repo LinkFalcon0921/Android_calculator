@@ -2,6 +2,7 @@ package com.example.testmobile.utils.operators;
 
 import static com.example.testmobile.R.color.*;
 import static com.example.testmobile.R.id.*;
+import static com.example.testmobile.R.drawable.*;
 
 import android.content.res.Resources;
 import android.view.View;
@@ -18,10 +19,11 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
     //    Class to convert the value from the Currency selected.
     private final MoneyConvertor moneyConvertor;
 
-    public MoneyOperators(TextCalculator resultView, Button[] buttons) {
+    public MoneyOperators(TextCalculator resultView, Button[] buttons, Button lastSelectedButton) {
         super(resultView, buttons);
         resources = buttons[0].getResources();
         this.moneyConvertor = new MoneyConvertor();
+        this.lastSelectedButton = lastSelectedButton;
     }
 
 
@@ -33,16 +35,16 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
 
     private void setLastButtonSelected(Button button) {
         if (buttons.contains(button)) {
-            this.lastSelectedButton.setBackgroundColor(resources.getColor(button_default_color));
+            this.lastSelectedButton.setBackgroundResource(btn_circle);
             this.lastSelectedButton = button;
-            this.lastSelectedButton.setBackgroundColor(resources.getColor(selected_money_color));
+            this.lastSelectedButton.setBackgroundResource(btn_circle_selected);
         }
     }
 
     private View.OnClickListener getOnClickListenerDefault() {
         return view -> {
             Button buttonSelected = (Button) view;
-            if (!this.resultsView.getText().isEmpty()) {
+            if (!this.resultsView.getValue().isEmpty()) {
                 getCalculateResult(buttonSelected);
             }
             this.setLastButtonSelected(buttonSelected);
@@ -50,7 +52,7 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
     }
 
     private void getCalculateResult(Button buttonSelected) {
-        if (this.getLastButtonSelected() == buttonSelected) {
+        if (this.getLastButtonSelected() == null || this.getLastButtonSelected() == buttonSelected) {
             return;
         }
 
@@ -65,19 +67,19 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
                     case btn_dollar:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOPtoDollar(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_franc:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOPtoFRANC(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_euro:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOPtoEURO(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
                 }
 
@@ -87,19 +89,19 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
                     case btn_dop:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOLLARtoDOP(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_franc:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOLLARtoFRANC(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_euro:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.DOLLARtoEURO(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
                 }
 
@@ -109,19 +111,19 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
                     case btn_dop:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.EUROtoDOP(value);
-                        resultsView.setText(resultDecimal.toString());
+                        resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_dollar:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.EUROtoDOLLAR(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_franc:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.EUROtoFRANC(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
                 }
 
@@ -131,19 +133,19 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
                     case btn_dop:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.FRANCtoDOP(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_dollar:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.FRANCtoDOLLAR(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
                         return;
 
                     case btn_euro:
                         value = getDoubleValue();
                         resultDecimal = this.moneyConvertor.FRANCtoEURO(value);
-                        this.resultsView.setText(resultDecimal.toString());
+                        this.resultsView.setValue(resultDecimal.toString());
 //                        End of the inner decision.
 
                 }
@@ -153,7 +155,7 @@ public class MoneyOperators extends SpecialButtonOperationsImpl {
     }
 
     private double getDoubleValue() {
-        return Double.parseDouble(this.resultsView.getText());
+        return Double.parseDouble(this.resultsView.getValue());
     }
 
 

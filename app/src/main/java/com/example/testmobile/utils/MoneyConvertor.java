@@ -1,6 +1,7 @@
 package com.example.testmobile.utils;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class MoneyConvertor {
@@ -14,76 +15,81 @@ public class MoneyConvertor {
     public static final double DOLLAR_EURO_AMOUNT = 1.01D;
 
     public static final double EURO_FRANC_AMOUNT = 1.03D;
+    public static final int DEFAULT_SCALE = 2;
 
     public MoneyConvertor() {
     }
 
     //    DOP conversion
     public BigDecimal DOPtoDollar(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(DOP_DOLLAR_AMOUNT));
+        return getDivide(amount, DOP_DOLLAR_AMOUNT, DEFAULT_SCALE);
     }
 
     public BigDecimal DOLLARtoDOP(double amount) {
-        return getBigDecimal(amount)
-                .multiply(getBigDecimal(DOP_DOLLAR_AMOUNT));
+        return getMultiply(amount, DOP_DOLLAR_AMOUNT);
     }
 
     public BigDecimal DOPtoEURO(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(DOP_EURO_AMOUNT));
+        return getDivide(amount,DOP_EURO_AMOUNT, DEFAULT_SCALE);
     }
 
     public BigDecimal EUROtoDOP(double amount) {
-        return getBigDecimal(amount)
-                .multiply(getBigDecimal(DOP_EURO_AMOUNT));
+        return getMultiply(amount, DOP_EURO_AMOUNT);
     }
 
     public BigDecimal DOPtoFRANC(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(DOP_FRANC_AMOUNT));
+        return getDivide(amount,DOP_FRANC_AMOUNT, DEFAULT_SCALE);
     }
 
     public BigDecimal FRANCtoDOP(double amount) {
-        return getBigDecimal(amount)
-                .multiply(getBigDecimal(DOP_FRANC_AMOUNT));
+        return getMultiply(amount, DOP_FRANC_AMOUNT);
     }
 
-//    DOLLAR conversion
 
+//    DOLLAR conversion
     public BigDecimal DOLLARtoFRANC(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(DOLLAR_FRANC_AMOUNT));
+        return getDivide(amount, DOLLAR_FRANC_AMOUNT, DEFAULT_SCALE);
     }
 
     public BigDecimal FRANCtoDOLLAR(double amount) {
-        return getBigDecimal(amount)
-                .multiply(getBigDecimal(DOLLAR_FRANC_AMOUNT));
+        return getMultiply(amount, DOLLAR_FRANC_AMOUNT);
     }
 
     public BigDecimal DOLLARtoEURO(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(DOLLAR_EURO_AMOUNT));
+        return getDivide(amount, DOLLAR_EURO_AMOUNT, DEFAULT_SCALE);
     }
 
     public BigDecimal EUROtoDOLLAR(double amount) {
-        return getBigDecimal(amount)
-                .multiply(getBigDecimal(DOLLAR_EURO_AMOUNT));
+        return getMultiply(amount, DOLLAR_EURO_AMOUNT);
     }
 
     //    FRANC corversion
+
     public BigDecimal FRANCtoEURO(double amount) {
-        return getBigDecimal(amount)
-                .divide(getBigDecimal(EURO_FRANC_AMOUNT));
+        return getDivide(amount, EURO_FRANC_AMOUNT, DEFAULT_SCALE);
+    }
+    public BigDecimal EUROtoFRANC(double amount) {
+        return getMultiply(amount, EURO_FRANC_AMOUNT);
     }
 
-    public BigDecimal EUROtoFRANC(double amount) {
+//    Privates values
+
+    private BigDecimal getDivide(double amount, double amountToConvert, int scale) {
         return getBigDecimal(amount)
-                .multiply(getBigDecimal(EURO_FRANC_AMOUNT));
+                .divide(getDefaultBigDecimal(amountToConvert), scale, RoundingMode.HALF_EVEN);
+    }
+
+    private BigDecimal getMultiply(double amount, double amountToConvert) {
+        return getBigDecimal(amount)
+                .multiply(getDefaultBigDecimal(amountToConvert), MathContext.DECIMAL128);
     }
 
     private BigDecimal getBigDecimal(double amount) {
         return BigDecimal.valueOf(amount).setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    private BigDecimal getDefaultBigDecimal(double amount) {
+        return BigDecimal.valueOf(amount);
     }
 
 }
