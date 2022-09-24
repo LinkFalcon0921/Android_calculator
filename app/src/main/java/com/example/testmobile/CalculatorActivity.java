@@ -2,17 +2,22 @@ package com.example.testmobile;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.testmobile.utils.Calculator;
+import com.example.testmobile.utils.EditorListenerImpl;
+import com.example.testmobile.utils.operators.ClearOperations;
 import com.example.testmobile.utils.operators.MoneyOperators;
 import com.example.testmobile.utils.TextCalculator;
 import com.example.testmobile.utils.operators.NumbersOperations;
 import com.example.testmobile.utils.operators.Operations;
 import com.example.testmobile.utils.operators.SignalOperators;
 import com.example.testmobile.utils.operators.SpecialButtonOperations;
+import com.example.testmobile.utils.validator.TextValidatorImpl;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -30,9 +35,9 @@ public class CalculatorActivity extends AppCompatActivity {
         this.resultView = new TextCalculator(results);
 
 //        Money convertors buttons.
-        Button dopDefaultButton = findViewById(R.id.btn_dop);
+        Button dopDefaultButton;
         Button[] buttonsConvertors = {
-                dopDefaultButton,
+                dopDefaultButton = findViewById(R.id.btn_dop),
                 findViewById(R.id.btn_dollar),
                 findViewById(R.id.btn_euro),
                 findViewById(R.id.btn_franc)
@@ -51,29 +56,41 @@ public class CalculatorActivity extends AppCompatActivity {
                 findViewById(R.id.btn_seven),
                 findViewById(R.id.btn_eight),
                 findViewById(R.id.btn_nine),
-                findViewById(R.id.btn_zero)
+                findViewById(R.id.btn_zero),
+                findViewById(R.id.btn_point)
         };
 //      Manager to the numeric pad.
         Operations numbersOperations = new NumbersOperations(buttonsNumbers, this.resultView);
         numbersOperations.setOnclickListener();
 
-//        Simple clear of the view.
-        Button btn_simple_clear = findViewById(R.id.btn_simple_clear);
-        btn_simple_clear.setOnClickListener(v -> this.resultView.backspaceResult());
-
-//        Full clear of the view.
-        Button btn_full_clear = findViewById(R.id.btn_full_clear);
-        btn_full_clear.setOnClickListener(v -> this.resultView.clearResult());
+        Calculator calculator = new Calculator();
 
 //        Operations buttons
         Button[] buttonsSigns = {
                 findViewById(R.id.btn_sum),
                 findViewById(R.id.btn_subtract),
                 findViewById(R.id.btn_multiply),
-                findViewById(R.id.btn_divide)
+                findViewById(R.id.btn_divide),
+                findViewById(R.id.btn_equals)
         };
 //      Manager of the operations calculator.
-        SpecialButtonOperations signsOperations = new SignalOperators(buttonsSigns, this.resultView);
+        SpecialButtonOperations signsOperations = new SignalOperators(buttonsSigns, this.resultView, calculator);
         signsOperations.setOnclickListener();
+
+        Button[] clearButtons = {
+                findViewById(R.id.btn_simple_clear),
+                findViewById(R.id.btn_full_clear)
+        };
+
+        ClearOperations.ExternalActions fullClearActions = () -> ((SignalOperators) signsOperations).clearComponentsActions();
+        Operations clearOperations = new ClearOperations(resultView, clearButtons, calculator, fullClearActions);
+        clearOperations.setOnclickListener();
+
+//      Check this for latest versions
+        EditText userNameEditable = findViewById(R.id.edit_username);
+        Operations[] buttonsOperations = {numbersOperations, signsOperations, moneyOperators, clearOperations};
+
+        TextView.OnEditorActionListener textWatcher = new EditorListenerImpl(buttonsOperations);
+        userNameEditable.setOnEditorActionListener(textWatcher);
     }
 }

@@ -5,8 +5,8 @@
 
     <string name="sum_label">+</string>
     <string name="subtract_label">-</string>
-    <string name="multiply_label">x</string>
-    <string name="divide_label">-</string>
+    <string name="multiply_label">&#215;</string>
+    <string name="divide_label">&#247;</string>
     <string name="equals_label">=</string>
 
     <string name="one_label">1</string>
@@ -19,6 +19,7 @@
     <string name="eight_label">8</string>
     <string name="nine_label">9</string>
     <string name="zero_label">0</string>
+    <string name="point_label">.</string>
 
     <string name="dop_label">$DOP</string>
     <string name="dollar_label">$US</string>

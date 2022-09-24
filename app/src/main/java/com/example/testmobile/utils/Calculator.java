@@ -1,9 +1,11 @@
 package com.example.testmobile.utils;
 
 import java.math.BigDecimal;
+import static com.example.testmobile.utils.ResultDefault.EMPTY_DEFAULT_TEXT;
+
+import com.example.testmobile.exceptions.DivisionByZeroException;
 
 public class Calculator {
-    public static final String EMPTY_STRING = "";
     private BigDecimal first, second;
 
     public Calculator() {
@@ -20,7 +22,7 @@ public class Calculator {
 
     public String sum() {
         if (!isPossible()){
-            return EMPTY_STRING;
+            return EMPTY_DEFAULT_TEXT;
         }
 
         this.first = first.add(this.second);
@@ -31,7 +33,7 @@ public class Calculator {
 
     public String subtract() {
         if (!isPossible()){
-            return EMPTY_STRING;
+            return EMPTY_DEFAULT_TEXT;
         }
         first = first.subtract(second);
         this.clearSecondField();
@@ -41,7 +43,7 @@ public class Calculator {
 
     public String multiply() {
         if (!isPossible()){
-            return EMPTY_STRING;
+            return EMPTY_DEFAULT_TEXT;
         }
         first = first.multiply(second);
         this.clearSecondField();
@@ -52,16 +54,15 @@ public class Calculator {
     public String divide() {
         try {
             if (!isPossible()){
-                return EMPTY_STRING;
+                return EMPTY_DEFAULT_TEXT;
             }
             first = first.divide(second);
             this.clearSecondField();
 
             return this.first.toString();
         } catch (ArithmeticException e) {
+            return DivisionByZeroException.SYNTAX_ERROR;
         }
-
-        return EMPTY_STRING;
     }
 
     private boolean isPossible() {

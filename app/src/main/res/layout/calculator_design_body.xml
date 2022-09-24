@@ -5,11 +5,15 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/user_name"
+        android:id="@+id/edit_username"
         android:layout_width="match_parent"
+        android:hint="@string/edit_advice_name"
         android:layout_height="wrap_content"
+        android:inputType="textImeMultiLine"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
         android:layout_marginBottom="10dp"
-        android:maxLength="30" />
+        android:maxLength="20" />
 
     <TableLayout
         android:id="@+id/body_calculator"
@@ -26,7 +30,7 @@
                 android:background="@color/gray_200"
                 android:paddingVertical="15dp"
                 android:paddingEnd="10dp"
-                android:text="@string/Empty_result"
+                android:text="@string/empty_result"
                 android:textAlignment="textEnd"
                 android:textColor="@color/white"
                 android:textSize="32sp" />
@@ -99,7 +103,7 @@
                         android:backgroundTint="@color/full_clear_color"
                         android:text="@string/full_clear_label"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/btn_text_size" />
+                        android:textSize="@dimen/btn_text_size_medium" />
 
                     <Button
                         android:id="@+id/btn_simple_clear"
@@ -123,7 +127,7 @@
                         android:background="@drawable/btn_circle"
                         android:text="@string/sum_label"
                         android:textColor="@color/teal_700"
-                        android:textSize="@dimen/btn_text_size" />
+                        android:textSize="@dimen/btn_text_size_medium" />
 
                     <Button
                         android:id="@+id/btn_seven"
@@ -167,7 +171,7 @@
                         android:background="@drawable/btn_circle"
                         android:text="@string/subtract_label"
                         android:textColor="@color/teal_700"
-                        android:textSize="@dimen/btn_text_size" />
+                        android:textSize="@dimen/btn_text_size_medium" />
 
                     <Button
                         android:id="@+id/btn_four"
@@ -211,7 +215,7 @@
                         android:background="@drawable/btn_circle"
                         android:text="@string/multiply_label"
                         android:textColor="@color/teal_700"
-                        android:textSize="@dimen/btn_text_size" />
+                        android:textSize="@dimen/btn_text_size_medium" />
 
 
                     <Button
@@ -256,15 +260,23 @@
                         android:background="@drawable/btn_circle"
                         android:text="@string/divide_label"
                         android:textColor="@color/teal_700"
-                        android:textSize="@dimen/btn_text_size" />
+                        android:textSize="@dimen/btn_text_size_medium" />
 
-                    <!--Edit this-->
+                    <Button
+                        android:id="@+id/btn_point"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_height="@dimen/bottom_height_70"
+                        android:layout_margin="@dimen/btn_margin"
+                        android:background="@drawable/btn_circle_large"
+                        android:text="@string/point_label"
+                        android:textColor="@color/teal_700"
+                        android:textSize="@dimen/btn_text_size_medium" />
+
                     <Button
                         android:id="@+id/btn_zero"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_height="@dimen/bottom_height_70"
                         android:layout_margin="@dimen/btn_margin"
-                        android:layout_span="2"
                         android:background="@drawable/btn_circle_large"
                         android:text="@string/zero_label"
                         android:textColor="@color/teal_700"

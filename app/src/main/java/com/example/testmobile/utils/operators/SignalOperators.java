@@ -1,22 +1,19 @@
 package com.example.testmobile.utils.operators;
 
-import android.view.View;
 import android.widget.Button;
 
 import com.example.testmobile.utils.Calculator;
-import com.example.testmobile.utils.ResultDefault;
 import com.example.testmobile.utils.TextCalculator;
 
 import static com.example.testmobile.R.id.*;
-import static com.example.testmobile.utils.ResultDefault.EMPTY;
 
 public class SignalOperators extends SpecialButtonOperationsImpl {
 
     private Calculator calculator;
 
-    public SignalOperators(Button[] buttons, TextCalculator resultView) {
+    public SignalOperators(Button[] buttons, TextCalculator resultView, Calculator calculator) {
         super(resultView, buttons);
-        this.calculator = new Calculator();
+        this.calculator = calculator;
     }
 
     @Override
@@ -28,14 +25,20 @@ public class SignalOperators extends SpecialButtonOperationsImpl {
 
     @Override
     public void setOnclickListener() {
-        View.OnClickListener listener = view -> this.calculate(((Button) view));
-
-        this.setOnclickListener(listener);
+        this.setOnclickListener(view -> this.calculate(((Button) view)));
     }
 
     private void calculate(Button buttonSelected) {
+
 //        Do nothing if the has an Syntax
-        if (this.resultsView.isThrowSyntaxError()) {
+        if (this.resultsView.isThrowSyntaxError()
+                || buttonSelected.equals(this.getLastButtonSelected())) {
+            return;
+        }
+
+//        In case the value is 0 and just change the sign.
+        if (this.resultsView.isClear()) {
+            this.lastSelectedButton = buttonSelected;
             return;
         }
 
@@ -49,8 +52,7 @@ public class SignalOperators extends SpecialButtonOperationsImpl {
 
         String valueResult = getResultBySign(buttonSelected);
 
-        this.resultsView.setValue(valueResult);
-
+        this.resultsView.setResults(valueResult);
     }
 
     private String getResultBySign(Button buttonSelected) {
@@ -72,14 +74,14 @@ public class SignalOperators extends SpecialButtonOperationsImpl {
 //                for equals button
             default:
                 valueResult = this.getResultBySign(this.getLastButtonSelected());
-                equalsAction();
+                clearComponentsActions();
         }
 
         return valueResult;
     }
 
     //Delete the last button when click equals button
-    private void equalsAction() {
+    public void clearComponentsActions() {
         this.lastSelectedButton = null;
         this.calculator.clearAllField();
     }

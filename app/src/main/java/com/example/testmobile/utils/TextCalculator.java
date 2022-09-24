@@ -1,6 +1,7 @@
 package com.example.testmobile.utils;
 
 import android.widget.TextView;
+
 import static com.example.testmobile.utils.ResultDefault.*;
 
 import com.example.testmobile.exceptions.DivisionByZeroException;
@@ -15,56 +16,77 @@ public class TextCalculator {
     }
 
     public void addText(CharSequence nextText) {
-        if (!this.isSpecialCharacterAlreadyExists(nextText)) {
-            this.add(nextText);
+        if (this.isSpecialCharacterAlreadyExists(nextText)) {
+            return;
         }
+        this.add(nextText);
     }
 
-    public void setValue(CharSequence nextText) {
-        results.setText(nextText);
+    public void setResults(CharSequence result){
+        this.setValue(result);
+    }
+
+    private void setValue(CharSequence nextText) {
+        this.results.setText(nextText);
     }
 
     public String getValue() {
-        return results.getText().toString();
+        return this.results.getText().toString();
     }
 
     public void backspaceResult() {
+        if(this.isClear()){
+            return;
+        }
+//        Variable
         int length = results.getText().length();
-        if (length > ONE) {
-            results.setText(results.getText().subSequence(ZERO, length - 1));
-        }
+
         if (length == ONE) {
-            setEmpty();
+            this.clearResult();
+            return;
         }
+
+        this.setValue(this.getValue().subSequence(ZERO, length - 1));
+
+
     }
 
     public void clearResult() {
-        results.setText(EMPTY_DEFAULT_TEXT);
-    }
-
-    private void setEmpty() {
-        add(EMPTY_DEFAULT_TEXT);
+        this.setValue(EMPTY_DEFAULT_TEXT);
     }
 
     private void add(CharSequence nextText) {
-        if (!results.getText().equals(EMPTY_DEFAULT_TEXT) && this.getValue().equals(nextText)) {
+        if (this.isClear() && nextText.equals(EMPTY_DEFAULT_TEXT)) {
             return;
         }
 //        Syntax error checker
-        if (isThrowSyntaxError()) {
-            clearResult();
+        if (this.isThrowSyntaxError()) {
+            this.clearResult();
         }
 
-        this.results.setText(String.join(EMPTY, results.getText(), nextText));
+        if(this.isClear()){
+            this.setValue(EMPTY);
+        }
+
+        this.setValue(String.join(EMPTY, this.getValue(), nextText));
     }
 
-//    Check in case throw a error when the calculator fails.
+    //    Check in case throw a error when the calculator fails.
     public boolean isThrowSyntaxError() {
-        return this.getValue().equals(DivisionByZeroException.SYNTAX_ERROR);
+        return this.matchWith(DivisionByZeroException.SYNTAX_ERROR);
+    }
+
+//    Check if the text has been clear.
+    public boolean isClear(){
+        return this.matchWith(EMPTY_DEFAULT_TEXT);
+    }
+
+    public boolean matchWith(CharSequence value){
+        return this.getValue().equals(value);
     }
 
     private boolean isSpecialCharacterAlreadyExists(CharSequence nextText) {
-        return isSpecialCharacter(nextText.charAt(ZERO)) && results.getText().toString().contains(nextText);
+        return isSpecialCharacter(nextText.charAt(ZERO)) && this.getValue().contains(nextText);
     }
 
     private boolean isSpecialCharacter(char nextChar) {

@@ -5,8 +5,6 @@ import android.widget.Button;
 
 import com.example.testmobile.utils.TextCalculator;
 
-import java.util.Arrays;
-
 public class NumbersOperations extends OperationsImpl {
 
     public NumbersOperations(Button[] numbersButtons, TextCalculator resultView) {
