@@ -1,7 +1,7 @@
-package com.example.testmobile.utils;
+package com.example.testmobile.utils.calculator;
 
 import java.math.BigDecimal;
-import static com.example.testmobile.utils.ResultDefault.EMPTY_DEFAULT_TEXT;
+import static com.example.testmobile.utils.values.ResultDefault.EMPTY_DEFAULT_TEXT;
 
 import com.example.testmobile.exceptions.DivisionByZeroException;
 

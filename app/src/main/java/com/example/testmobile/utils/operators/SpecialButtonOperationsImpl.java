@@ -2,7 +2,7 @@ package com.example.testmobile.utils.operators;
 
 import android.widget.Button;
 
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.managers.TextCalculator;
 
 abstract class SpecialButtonOperationsImpl extends OperationsImpl implements SpecialButtonOperations{
 

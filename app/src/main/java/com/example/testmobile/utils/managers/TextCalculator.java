@@ -1,8 +1,8 @@
-package com.example.testmobile.utils;
+package com.example.testmobile.utils.managers;
 
 import android.widget.TextView;
 
-import static com.example.testmobile.utils.ResultDefault.*;
+import static com.example.testmobile.utils.values.ResultDefault.*;
 
 import com.example.testmobile.exceptions.DivisionByZeroException;
 

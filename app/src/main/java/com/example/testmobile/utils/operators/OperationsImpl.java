@@ -3,7 +3,7 @@ package com.example.testmobile.utils.operators;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.managers.TextCalculator;
 
 import java.util.Arrays;
 import java.util.List;

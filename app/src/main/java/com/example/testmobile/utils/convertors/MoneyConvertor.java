@@ -1,6 +1,7 @@
-package com.example.testmobile.utils;
+package com.example.testmobile.utils.convertors;
 
 import static java.math.RoundingMode.HALF_EVEN;
+import static java.math.RoundingMode.HALF_UP;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -18,7 +19,7 @@ public class MoneyConvertor {
 
     public static final double EURO_FRANC_AMOUNT = 1.03D;
 
-    public static final int DEFAULT_SCALE = 3;
+    public static final int DEFAULT_SCALE = 4;
 
     public MoneyConvertor() {
     }
@@ -79,7 +80,7 @@ public class MoneyConvertor {
 
     private BigDecimal getDivide(double amount, double amountToConvert, int scale) {
         return getBigDecimal(amount)
-                .divide(getDefaultBigDecimal(amountToConvert), scale, HALF_EVEN);
+                .divide(getDefaultBigDecimal(amountToConvert), scale, HALF_UP);
     }
 
     private BigDecimal getMultiply(double amount, double amountToConvert) {
@@ -89,7 +90,7 @@ public class MoneyConvertor {
     }
 
     private BigDecimal getBigDecimal(double amount) {
-        return BigDecimal.valueOf(amount).setScale(2, HALF_EVEN);
+        return BigDecimal.valueOf(amount).setScale(2, HALF_UP);
     }
 
     private BigDecimal getDefaultBigDecimal(double amount) {

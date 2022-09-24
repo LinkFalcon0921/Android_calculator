@@ -2,16 +2,16 @@ package com.example.testmobile.utils.operators;
 
 import android.widget.Button;
 
-import com.example.testmobile.utils.Calculator;
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.calculator.Calculator;
+import com.example.testmobile.utils.managers.TextCalculator;
 
 import static com.example.testmobile.R.id.*;
 
-public class SignalOperators extends SpecialButtonOperationsImpl {
+public class SignalOperations extends SpecialButtonOperationsImpl {
 
     private Calculator calculator;
 
-    public SignalOperators(Button[] buttons, TextCalculator resultView, Calculator calculator) {
+    public SignalOperations(Button[] buttons, TextCalculator resultView, Calculator calculator) {
         super(resultView, buttons);
         this.calculator = calculator;
     }
@@ -29,30 +29,28 @@ public class SignalOperators extends SpecialButtonOperationsImpl {
     }
 
     private void calculate(Button buttonSelected) {
-
-//        Do nothing if the has an Syntax
+        //        Do nothing if the has an Syntax
         if (this.resultsView.isThrowSyntaxError()
                 || buttonSelected.equals(this.getLastButtonSelected())) {
             return;
         }
 
-//        In case the value is 0 and just change the sign.
-        if (this.resultsView.isClear()) {
-            this.lastSelectedButton = buttonSelected;
-            return;
-        }
-
         this.calculator.add(this.resultsView.getValue());
+        this.resultsView.clearResult();
 
-        if (getLastButtonSelected() == null) {
-            this.lastSelectedButton = buttonSelected;
-            this.resultsView.clearResult();
+        if (getLastButtonSelected() == null && buttonSelected.getId() != btn_equals) {
+            setLastSelectedButton(buttonSelected);
             return;
         }
 
         String valueResult = getResultBySign(buttonSelected);
 
         this.resultsView.setResults(valueResult);
+    }
+
+    private void setLastSelectedButton(Button buttonSelected) {
+        this.lastSelectedButton = buttonSelected;
+        this.resultsView.clearResult();
     }
 
     private String getResultBySign(Button buttonSelected) {

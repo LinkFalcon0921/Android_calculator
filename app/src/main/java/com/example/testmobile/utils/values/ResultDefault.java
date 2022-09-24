@@ -1,4 +1,4 @@
-package com.example.testmobile.utils;
+package com.example.testmobile.utils.values;
 
 public interface ResultDefault {
     int ZERO = 0;

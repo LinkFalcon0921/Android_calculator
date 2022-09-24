@@ -8,16 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.testmobile.utils.Calculator;
-import com.example.testmobile.utils.EditorListenerImpl;
+import com.example.testmobile.utils.calculator.Calculator;
+import com.example.testmobile.utils.listeners.EditorListenerImpl;
 import com.example.testmobile.utils.operators.ClearOperations;
-import com.example.testmobile.utils.operators.MoneyOperators;
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.operators.MoneyOperations;
+import com.example.testmobile.utils.managers.TextCalculator;
 import com.example.testmobile.utils.operators.NumbersOperations;
 import com.example.testmobile.utils.operators.Operations;
-import com.example.testmobile.utils.operators.SignalOperators;
+import com.example.testmobile.utils.operators.SignalOperations;
 import com.example.testmobile.utils.operators.SpecialButtonOperations;
-import com.example.testmobile.utils.validator.TextValidatorImpl;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -43,7 +42,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 findViewById(R.id.btn_franc)
         };
 //      Manager to the MoneyConvertor
-        SpecialButtonOperations moneyOperators = new MoneyOperators(this.resultView, buttonsConvertors, dopDefaultButton);
+        SpecialButtonOperations moneyOperators = new MoneyOperations(this.resultView, buttonsConvertors, dopDefaultButton);
         moneyOperators.setOnclickListener();
 
         Button[] buttonsNumbers = {
@@ -74,7 +73,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 findViewById(R.id.btn_equals)
         };
 //      Manager of the operations calculator.
-        SpecialButtonOperations signsOperations = new SignalOperators(buttonsSigns, this.resultView, calculator);
+        SpecialButtonOperations signsOperations = new SignalOperations(buttonsSigns, this.resultView, calculator);
         signsOperations.setOnclickListener();
 
         Button[] clearButtons = {
@@ -82,7 +81,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 findViewById(R.id.btn_full_clear)
         };
 
-        ClearOperations.ExternalActions fullClearActions = () -> ((SignalOperators) signsOperations).clearComponentsActions();
+        ClearOperations.ExternalActions fullClearActions = () -> ((SignalOperations) signsOperations).clearComponentsActions();
         Operations clearOperations = new ClearOperations(resultView, clearButtons, calculator, fullClearActions);
         clearOperations.setOnclickListener();
 

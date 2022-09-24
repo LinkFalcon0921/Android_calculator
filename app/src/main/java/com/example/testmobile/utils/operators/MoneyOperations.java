@@ -1,6 +1,5 @@
 package com.example.testmobile.utils.operators;
 
-import static com.example.testmobile.R.color.*;
 import static com.example.testmobile.R.id.*;
 import static com.example.testmobile.R.drawable.*;
 
@@ -8,18 +7,18 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.testmobile.utils.MoneyConvertor;
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.convertors.MoneyConvertor;
+import com.example.testmobile.utils.managers.TextCalculator;
 
 import java.math.BigDecimal;
 
-public class MoneyOperators extends SpecialButtonOperationsImpl {
+public class MoneyOperations extends SpecialButtonOperationsImpl {
 
     private final Resources resources;
     //    Class to convert the value from the Currency selected.
     private final MoneyConvertor moneyConvertor;
 
-    public MoneyOperators(TextCalculator resultView, Button[] buttons, Button lastSelectedButton) {
+    public MoneyOperations(TextCalculator resultView, Button[] buttons, Button lastSelectedButton) {
         super(resultView, buttons);
         resources = buttons[0].getResources();
         this.moneyConvertor = new MoneyConvertor();

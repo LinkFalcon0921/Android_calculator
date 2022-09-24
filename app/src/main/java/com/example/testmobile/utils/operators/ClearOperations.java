@@ -2,8 +2,8 @@ package com.example.testmobile.utils.operators;
 
 import android.widget.Button;
 
-import com.example.testmobile.utils.Calculator;
-import com.example.testmobile.utils.TextCalculator;
+import com.example.testmobile.utils.calculator.Calculator;
+import com.example.testmobile.utils.managers.TextCalculator;
 
 import static com.example.testmobile.R.id.*;
 
